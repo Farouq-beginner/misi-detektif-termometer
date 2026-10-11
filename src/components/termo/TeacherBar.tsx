@@ -196,17 +196,17 @@ export default function TeacherBar() {
 function triggerSpaceAction() {
   const st = useGameStore.getState();
   switch (st.screen) {
-    case 3:
+    case 4:
       st.setLayar1Answer(!st.layar1AnswerShown);
       break;
-    case 5:
+    case 6:
       if (!st.layar3Result) st.checkLayar3();
       else st.resetLayar3();
       break;
-    case 6:
+    case 7:
       if (!st.layar4Checked) st.checkLayar4();
       break;
-    case 7:
+    case 8:
       if (st.quizAnswered && !st.quizFinished) st.nextQuiz();
       break;
   }
