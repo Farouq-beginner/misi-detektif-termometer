@@ -195,6 +195,38 @@
   animation: termo-pop 0.35s ease-out both;
 }
 
+@keyframes cover-credit-to-button {
+  0% {
+    opacity: 0;
+    transform: translateY(-28rem) scale(1.8);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-18rem) scale(1.25);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.cover-credit {
+  opacity: 0;
+  transform: translateY(-18rem) scale(1.8);
+  transform-origin: center bottom;
+}
+.cover-credit-active {
+  animation: cover-credit-to-button 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes splash-loading {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(250%); }
+}
+.splash-loading {
+  animation: splash-loading 1.2s ease-in-out infinite;
+}
+
 /* Animasi air raksa termometer naik/turun */
 @keyframes termo-shake {
   0%, 100% { transform: rotate(0deg); }

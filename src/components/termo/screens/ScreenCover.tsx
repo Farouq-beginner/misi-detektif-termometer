@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGameStore } from "@/store/useGameStore";
@@ -7,10 +8,16 @@ import GarisBilangan from "../GarisBilangan";
 
 export default function ScreenCover() {
   const nextScreen = useGameStore((state) => state.nextScreen);
+  const [showCompactCredit, setShowCompactCredit] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowCompactCredit(true), 1700);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-145px)] max-w-6xl items-center justify-center px-4 py-8 sm:py-12">
-      <section className="w-full overflow-hidden rounded-[2rem] border border-[#D7E4F0] bg-white shadow-[0_24px_70px_rgba(31,42,68,0.14)]">
+      <section className="w-full overflow-hidden rounded-4xl border border-[#D7E4F0] bg-white shadow-[0_24px_70px_rgba(31,42,68,0.14)]">
         <div className="bg-[#F3F7FB] px-5 pb-8 pt-8 sm:px-12 sm:pb-12 sm:pt-10">
           <div className="text-center">
             <p className="font-serif text-4xl font-extrabold tracking-tight text-[#1F3B5D] sm:text-6xl">
@@ -62,11 +69,20 @@ export default function ScreenCover() {
             </div>
           </div>
 
-          <div className="mt-8 flex justify-center">
-            <Button onClick={nextScreen} size="lg" className="h-14 rounded-2xl bg-[#2777BA] px-8 text-lg font-extrabold text-white shadow-lg hover:bg-[#1f659f]">
-              <BookOpen className="mr-2 h-5 w-5" />
-              Mulai Pembelajaran
-            </Button>
+          <div className="mt-5 flex justify-center">
+            <div className="flex flex-col items-center">
+              <p
+                className={`cover-credit relative z-10 mb-4 rounded-full border border-[#2777BA]/30 bg-[#EAF6FF] px-4 py-1 text-1xs font-bold text-[#1F2A44] ${
+                  showCompactCredit ? "cover-credit-active" : ""
+                }`}
+              >
+                disusun oleh: Zindo Iviantri
+              </p>
+              <Button onClick={nextScreen} size="lg" className="h-14 rounded-2xl bg-[#2777BA] px-8 text-lg font-extrabold text-white shadow-lg hover:bg-[#1f659f]">
+                <BookOpen className="mr-2 h-5 w-5" />
+                Mulai Pembelajaran
+              </Button>
+            </div>
           </div>
         </div>
       </section>

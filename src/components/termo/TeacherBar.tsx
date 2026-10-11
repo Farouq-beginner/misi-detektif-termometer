@@ -98,7 +98,7 @@ export default function TeacherBar() {
         <div className="flex items-center gap-1.5 rounded-xl bg-[#EAF6FF] px-3 py-2">
           <span className="text-sm font-bold text-[#5B6B85]">Layar</span>
           <span className="text-lg font-extrabold text-[#1E6FD9]">{screen}</span>
-          <span className="text-sm font-bold text-[#5B6B85]">/ 8</span>
+          <span className="text-sm font-bold text-[#5B6B85]">/ 9</span>
         </div>
 
         <TooltipProvider delayDuration={300}>
@@ -108,7 +108,7 @@ export default function TeacherBar() {
                 variant="outline"
                 size="icon"
                 onClick={nextScreen}
-                disabled={screen >= 8}
+                disabled={screen >= 9}
                 aria-label="Layar berikutnya"
                 className="h-10 w-10 rounded-xl border-[#1E6FD9]/30 text-[#1E6FD9] hover:bg-[#EAF6FF]"
               >

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import RegisterSW from "@/components/pwa/register-sw";
+import ClearLegacyCache from "@/components/pwa/clear-legacy-cache";
 
 export const metadata: Metadata = {
   title: "Misi Detektif Termometer",
@@ -36,7 +36,7 @@ export default function RootLayout({
       <body className="antialiased bg-background text-foreground">
         {children}
         <Toaster />
-        <RegisterSW />
+        <ClearLegacyCache />
       </body>
     </html>
   );

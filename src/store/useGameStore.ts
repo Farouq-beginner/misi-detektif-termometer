@@ -12,7 +12,7 @@ export type CityItem = {
 
 export type MascotMood = "neutral" | "happy" | "think" | "sad";
 
-export type ScreenId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type ScreenId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export const CITIES: CityItem[] = [
   { id: "seoul", name: "Seoul", value: -2, icon: "🌤️", context: "suhu" },
@@ -146,7 +146,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     set({ screen: s, mascotMood: "neutral", mascotSpeech: defaultSpeech(s) }),
   nextScreen: () => {
     const s = get().screen;
-    if (s < 8) set({ screen: (s + 1) as ScreenId, mascotMood: "neutral", mascotSpeech: defaultSpeech((s + 1) as ScreenId) });
+      if (s < 9) set({ screen: (s + 1) as ScreenId, mascotMood: "neutral", mascotSpeech: defaultSpeech((s + 1) as ScreenId) });
   },
   prevScreen: () => {
     const s = get().screen;
@@ -301,18 +301,20 @@ function defaultSpeech(s: ScreenId): string {
     case 1:
       return "Selamat datang di pembelajaran bilangan bulat!";
     case 2:
-      return "Simak video pemantik sebelum memulai misi.";
+      return "Kenali tujuan pembelajaran sebelum memulai misi.";
     case 3:
-      return "Hai Detektif! Siap menjelajahi suhu dunia?";
+      return "Simak video pemantik sebelum memulai misi.";
     case 4:
-      return "Geser termometernya, lihat garis bilangannya ikut bergerak!";
+      return "Hai Detektif! Siap menjelajahi suhu dunia?";
     case 5:
-      return "Pilih dua kota, lalu bandingkan. Siapa lebih dingin?";
+      return "Geser termometernya, lihat garis bilangannya ikut bergerak!";
     case 6:
-      return "Tarik kartu kota ke garis bilangan, urutkan dari paling dingin!";
+      return "Pilih dua kota, lalu bandingkan. Siapa lebih dingin?";
     case 7:
-      return "Ayo tebak titik ? di garis bilangan!";
+      return "Tarik kartu kota ke garis bilangan, urutkan dari paling dingin!";
     case 8:
+      return "Ayo tebak titik ? di garis bilangan!";
+    case 9:
       return "Kesimpulan misi sudah siap. Bagus sekali, Detektif!";
   }
 }

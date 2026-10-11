@@ -4,7 +4,7 @@ Agent: main-orchestrator
 Task: Membangun aplikasi desktop offline + fullscreen "Misi Detektif Termometer" (PWA Next.js) untuk belajar bilangan bulat SMP.
 
 Work Log:
-- Setup PWA: public/manifest.json (display fullscreen, theme #1E6FD9), public/sw.js (service worker cache-first/network-first untuk offline), public/icon.svg (maskot termometer), komponen RegisterSW (indikator mode offline).
+- Setup PWA: public/manifest.json (display fullscreen, theme #1E6FD9), public/icon.svg (maskot termometer), tombol fullscreen native, dan pembersihan data cache lama.
 - Layout & tema: layout.tsx dipakai font sistem (Trebuchet MS/Segoe UI, tanpa internet), metadata manifest, viewport theme color, registrasi SW. globals.css ditambah variabel tema (--termo-cold #1E6FD9, --termo-warm #FF8A3D, --termo-zero #7B5CD6, --termo-ink #1F2A44, --termo-ok #2DB67D, --termo-no #E5484D), kelas .termo-bg (gradasi #EAF6FF→putih), .termo-card, scrollbar kustom, animasi (termo-bounce, termo-pop, termo-shake).
 - Zustand store (src/store/useGameStore.ts): state 6 layar, konteks suhu/kedalaman, maskot mood+speech, jawaban layar 1, perbandingan layar 3 (dengan guess), urutan kartu layar 4 (dengan hint level), quiz 8 soal + skor, fullscreen, shortcut spasi per layar.
 - Komponen bersama: SiTermo (SVG maskot 4 ekspresi: neutral/happy/think/sad), Termometer (vertikal, kolom biru/oranye/ungu sesuai tanda), GarisBilangan (horizontal, kiri 0 biru, kanan 0 oranye, 0 ungu, panah makin kecil/besar), CityCard, SpeechBubble, MascotOverlay, TeacherBar.
@@ -15,7 +15,7 @@ Work Log:
 Stage Summary:
 - Aplikasi PWA siap install sebagai desktop app (manifest display:fullscreen), berjalan offline via service worker, tombol fullscreen native.
 - Semua teks brief persis, warna konsisten (biru=negatif, oranye=positif, ungu=nol), font sistem tanpa internet, maskot SVG Si Termo dengan ekspresi berubah, balon kata, teacher controls lengkap (←/→, spasi, ganti konteks, fullscreen).
-- Artefak: src/app/page.tsx, src/app/layout.tsx, src/app/globals.css, src/store/useGameStore.ts, src/components/termo/* (SiTermo, Termometer, GarisBilangan, CityCard, SpeechBubble, MascotOverlay, TeacherBar), src/components/termo/screens/* (Screen1-6), src/components/pwa/register-sw.tsx, public/{manifest.json,sw.js,icon.svg}.
+- Artefak: src/app/page.tsx, src/app/layout.tsx, src/app/globals.css, src/store/useGameStore.ts, src/components/termo/* (SiTermo, Termometer, GarisBilangan, CityCard, SpeechBubble, MascotOverlay, TeacherBar), src/components/termo/screens/* (Screen1-6), public/{manifest.json,icon.svg}.
 
 ---
 Task ID: 2

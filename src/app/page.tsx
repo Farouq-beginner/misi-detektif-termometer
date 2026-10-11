@@ -1,9 +1,12 @@
 "use client";
 
 import { useGameStore } from "@/store/useGameStore";
+import { useEffect, useState } from "react";
 import TeacherBar from "@/components/termo/TeacherBar";
 import MascotOverlay from "@/components/termo/MascotOverlay";
+import SplashScreen from "@/components/termo/SplashScreen";
 import ScreenCover from "@/components/termo/screens/ScreenCover";
+import ScreenTujuanPembelajaran from "@/components/termo/screens/ScreenTujuanPembelajaran";
 import ScreenVideoPemantik from "@/components/termo/screens/ScreenVideoPemantik";
 import Screen1Pembuka from "@/components/termo/screens/Screen1Pembuka";
 import Screen2KenaliBulat from "@/components/termo/screens/Screen2KenaliBulat";
@@ -14,6 +17,26 @@ import Screen6Penutup from "@/components/termo/screens/Screen6Penutup";
 
 export default function Home() {
   const screen = useGameStore((s) => s.screen);
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const finishSplash = () => {
+      document.body.style.overflow = previousOverflow;
+      setShowSplash(false);
+    };
+    const timer = window.setTimeout(finishSplash, 1700);
+
+    return () => {
+      window.clearTimeout(timer);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
+  if (showSplash) {
+    return <SplashScreen />;
+  }
 
   return (
     <div className="termo-bg flex min-h-screen flex-col">
@@ -22,13 +45,14 @@ export default function Home() {
       <main className="flex-1">
         <div key={screen} className="termo-pop">
           {screen === 1 && <ScreenCover />}
-          {screen === 2 && <ScreenVideoPemantik />}
-          {screen === 3 && <Screen1Pembuka />}
-          {screen === 4 && <Screen2KenaliBulat />}
-          {screen === 5 && <Screen3SiapaDingin />}
-          {screen === 6 && <Screen4Urutkan />}
-          {screen === 7 && <Screen5TebakTitik />}
-          {screen === 8 && <Screen6Penutup />}
+          {screen === 2 && <ScreenTujuanPembelajaran />}
+          {screen === 3 && <ScreenVideoPemantik />}
+          {screen === 4 && <Screen1Pembuka />}
+          {screen === 5 && <Screen2KenaliBulat />}
+          {screen === 6 && <Screen3SiapaDingin />}
+          {screen === 7 && <Screen4Urutkan />}
+          {screen === 8 && <Screen5TebakTitik />}
+          {screen === 9 && <Screen6Penutup />}
         </div>
       </main>
 
