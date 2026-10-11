@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useGameStore } from "@/store/useGameStore";
 
 const STORAGE_KEY = "termo-video-link";
-const DEFAULT_LINK = "https://youtu.be/9NwXiPiT_p4";
+const DEFAULT_LINK = "";
 
 /**
  * Ubah tautan YouTube / Google Drive menjadi URL embed.
