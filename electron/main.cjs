@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require("electron");
 const { fork } = require("node:child_process");
+const http = require("node:http");
 const path = require("node:path");
 
 const port = 3000;
@@ -25,11 +26,37 @@ function startNextServer() {
   serverProcess.on("error", (error) => {
     console.error("Next.js server failed to start:", error);
   });
+
+  serverProcess.stderr?.on("data", (data) => {
+    console.error(`[Next.js] ${data.toString()}`);
+  });
+}
+
+function waitForServer(timeoutMs = 30000) {
+  const startedAt = Date.now();
+
+  return new Promise((resolve, reject) => {
+    const check = () => {
+      const request = http.get(`http://127.0.0.1:${port}`, (response) => {
+        response.resume();
+        resolve();
+      });
+
+      request.on("error", () => {
+        if (Date.now() - startedAt >= timeoutMs) {
+          reject(new Error(`Next.js server did not start within ${timeoutMs}ms.`));
+          return;
+        }
+
+        setTimeout(check, 250);
+      });
+    };
+
+    check();
+  });
 }
 
 async function createWindow() {
-  startNextServer();
-
   const window = new BrowserWindow({
     width: 1280,
     height: 800,
@@ -41,8 +68,19 @@ async function createWindow() {
     },
   });
 
-  await new Promise((resolve) => setTimeout(resolve, 1500));
-  await window.loadURL(`http://127.0.0.1:${port}`);
+  startNextServer();
+
+  try {
+    await waitForServer();
+    await window.loadURL(`http://127.0.0.1:${port}`);
+  } catch (error) {
+    console.error("Misi Detektif Termometer could not start:", error);
+    await window.loadURL(
+      `data:text/html;charset=utf-8,${encodeURIComponent(
+        "<h1>Misi Detektif Termometer</h1><p>Aplikasi gagal memulai server lokal. Silakan tutup dan coba lagi.</p>"
+      )}`
+    );
+  }
 }
 
 app.whenReady().then(createWindow);
